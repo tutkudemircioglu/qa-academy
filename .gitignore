@@ -1,6 +1,24 @@
 # Compiled class file
 *.class
 
+######################
+# Intellij
+######################
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+classes/
+out/
+
+######################
+# Maven
+######################
+/log/
+/target/
+
 # Log file
 *.log
 
