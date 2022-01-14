@@ -44,7 +44,7 @@ public class SampleTest4 {
                 .log().all();
     }
 
-    @Attachment("{httpRequest.baseUri}" + "{path}")
+    @Attachment("https://petstore.swagger.io/v2/store/inventory")
     public String attachment(RequestSpecification httpRequest, String path, Response response) {
         String html = "Url = " + ((RequestSpecificationImpl) httpRequest).getBaseUri() + path + "\n \n" + "Request Headers = " + ((RequestSpecificationImpl) httpRequest).getHeaders() + "\n \n" + "Request Body = " + ((RequestSpecificationImpl) httpRequest).getBody() + "\n \n" + "Response Body = " + response.getBody().asString();
         return html;
