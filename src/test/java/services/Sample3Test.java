@@ -12,7 +12,7 @@ public class Sample3Test {
     public Object[][] dataProvider(){
         return new Object[][]{
                 {2, 200},
-                {1,200}
+                {3,200}
         };
     }
 
