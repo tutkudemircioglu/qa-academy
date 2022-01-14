@@ -1,7 +1,9 @@
 package services;
 
 import io.restassured.RestAssured;
+import io.restassured.internal.RequestSpecificationImpl;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,8 +15,12 @@ public class SampleTest4 {
 
     @Test
     public void sample() {
-        Response response = RestAssured.get("https://petstore.swagger.io/v2/store/inventory");
-
+        String baseUrl = "https://petstore.swagger.io/v2/store/inventory";
+        RequestSpecification restAssuredReq = RestAssured.given()
+                .log()
+                .all(true);
+        Response response = restAssuredReq.get(baseUrl);
+        attachment(restAssuredReq,baseUrl,response);
         System.out.println("getBody: " + response.asString());
         System.out.println("getBody: " + response.getBody().asString());
         System.out.println("getStatusCode: " + response.getStatusCode());
@@ -35,6 +41,11 @@ public class SampleTest4 {
                 .statusCode(200)
                 .time(lessThan(2000L))
                 .log().all();
+    }
+
+    public String attachment(RequestSpecification httpRequest, String path, Response response) {
+        String html = "Url = " + ((RequestSpecificationImpl) httpRequest).getBaseUri() + path + "\n \n" + "Request Headers = " + ((RequestSpecificationImpl) httpRequest).getHeaders() + "\n \n" + "Request Body = " + ((RequestSpecificationImpl) httpRequest).getBody() + "\n \n" + "Response Body = " + response.getBody().asString();
+        return html;
     }
 
 }
